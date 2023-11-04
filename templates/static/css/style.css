@@ -1,0 +1,36 @@
+
+
+
+.container{
+    margin-top: 30px;
+}
+
+
+
+.container_{
+    width: 98%;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    height: 880px;
+    
+}
+
+.container_ .blocos{
+    border: 1px solid red;
+    flex: 1;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.container_ div h3{
+    background: grey;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.unchecked_devices_box{
+
+}

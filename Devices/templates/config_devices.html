@@ -1,0 +1,56 @@
+
+{% extends 'static/base/base.html' %}
+
+{% block 'head' %} 
+    {% block 'title' %} Configure devices {% endblock %}
+
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="container_">
+    <div class="blocos left_block">
+        <h3>Device List</h3>
+        <div class="unchecked_devices_box">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Device</th>
+                    <th scope="col">IP Address</th>
+                    <th scope="col">Manufacturing</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for device in context.devices %}    
+                        <tr>
+                            <th scope="row"> <input type="checkbox" name="" id=""></th>
+                                <td> <a href="#"> {{device.device}}</a>
+                                </td>
+                                <td>{{device.ip_addr}}</td>
+                                <td>{{device.fabricante}}</td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+              </table>
+        </div>
+
+        <div><input type="button" value="Configure Device"> <input type="button" value="Add Device"></div> 
+    </div>
+    <div class="blocos center_block">
+        <h3>Device Selected</h3>
+        <div class="checked_devices_box" >
+
+        </div>
+        <input type="button" value="Remove Device">
+    </div>
+    <div class="blocos right_block">
+        <h3>Configurations</h3>
+        <div class="checked_devices_box" >
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="run_br"><i class="fa-solid fa-person-running fa-xl"></i> <label>Run </label></div>
+    </div>
+</div>
+
+{% endblock %}

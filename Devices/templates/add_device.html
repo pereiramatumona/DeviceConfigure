@@ -1,0 +1,82 @@
+{% extends 'static/base/base.html' %}
+{% load static %}
+
+{% block 'head' %}
+
+{% block 'title' %} Devices {% endblock%}
+
+{% endblock%}
+
+{% block 'body' %}
+
+<div class="container" >
+    
+    <div class="card text-center" >
+        <h3>Add Device</h3>
+        <hr>
+        <form action="add_device" method="post">
+            <div class="form-group">
+
+                <div class="form-group rol">
+                <label class="col-sm-2 col-form-label"> Device Nama </label>
+                <input type="text" name="device" value="{{device.device}}" placeholder="Device Name">
+                </div>
+
+                <div class="form-group rol"></div>
+                <label class="col-sm-2 col-form-label"> Device IP Address</label>
+                <input type="text" name="ip_addr" value="{{device.ip_addr}}" placeholder="Device IP Address">
+                </div>
+
+                <div class="form-group rol"></div>
+                    <label class="col-sm-2 col-form-label"> Device Manufacture</label>
+                    <select name="" id="" >
+                        <option value="">Select de Manufactur</option>
+                        {% for fabricante in context.fabricantes %}
+                            <option value="{{fabricante.0}}">{{fabricante.0}}</option>
+                        {% endfor%}
+                    </select>
+                </div>
+                <div class="form-group row ">
+                    <input type="submit" class="btn btn-primary mb-2" name="add" value="Add">
+                    <input type="button" class="btn btn-secondary mb-2" name="config" value="Config">
+                    <input type="button" class="btn btn-secondary mb-2" name="reload" value="Limpar">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card text-center" text>
+        <h3>List Devices</h3>
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Device</th>
+                        <th scope="col">IP Address</th>
+                        <th scope="col">Manufactured by</th>
+                        <th scope="col">Acçoes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for device in context.devices %}    
+                            <tr>
+                                <th scope="row">1</th>
+                                <td> <a href="#"> {{device.device}}</a>
+                                </td>
+                                <td>{{device.ip_addr}}</td>
+                                <td>{{device.fabricante}}</td>
+                                <td><a href="">Delete</a> | <a href="">Edit</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+                  
+                </table>
+            </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
