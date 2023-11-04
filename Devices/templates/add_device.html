@@ -14,11 +14,15 @@
     <div class="card text-center" >
         <h3>Add Device</h3>
         <hr>
-        <form action="add_device" method="post">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}"> {{ message }} </div>
+            {% endfor %}
+        {% endif %}
+        <form action="add_device" method="post"> {% csrf_token %}
             <div class="form-group">
-
                 <div class="form-group rol">
-                <label class="col-sm-2 col-form-label"> Device Nama </label>
+                <label class="col-sm-2 col-form-label"> Device Name </label>
                 <input type="text" name="device" value="{{device.device}}" placeholder="Device Name">
                 </div>
 
@@ -29,7 +33,7 @@
 
                 <div class="form-group rol"></div>
                     <label class="col-sm-2 col-form-label"> Device Manufacture</label>
-                    <select name="" id="" >
+                    <select name="manufacturing" id="" >
                         <option value="">Select de Manufactur</option>
                         {% for fabricante in context.fabricantes %}
                             <option value="{{fabricante.0}}">{{fabricante.0}}</option>

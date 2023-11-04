@@ -61,8 +61,6 @@
 
 
 
-
-
 .run_bt{
     background: rgb(241, 16, 16);
     color: white;
@@ -72,9 +70,25 @@
     height: 30px;
 }
 
-.run_bt a,i,label{
-    margin-top: 1px;
-    color: white;
-    text-decoration: none;
+
+/* -------- MESSAGENS E ALERTAS -----------*/
+.alert{
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    height: 40px;
+    border: 5px;
+    display: flex;
+    align-items: center;
+    transition: width 1s ease-out;
 }
 
+.alert-success{
+    background: rgba(13, 235, 24, 0.133);
+    color: #2b4b0c;
+}
+
+.alert-danger{
+    background: rgba(238, 139, 9, 0.133);
+    color: rgb(160, 56, 24);
+}
