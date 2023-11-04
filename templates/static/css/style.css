@@ -6,7 +6,6 @@
 }
 
 
-
 .container_{
     width: 98%;
     margin: 10px;
@@ -17,20 +16,65 @@
 }
 
 .container_ .blocos{
-    border: 1px solid red;
+    border: 2px solid var(--azul-linha);
     flex: 1;
     margin: 5px;
     border-radius: 5px;
     padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .container_ div h3{
-    background: grey;
+    background: gb(156, 151, 151);
     justify-content: center;
     text-align: center;
-    
 }
 
 .unchecked_devices_box{
-
+    height: 780px;
+    margin-bottom: 4px;
+    border: 1px solid rgb(156, 151, 151);
+    overflow-y: auto;
 }
+.checked_devices_box{
+    height: 780px;
+    margin-bottom: 4px;
+    border: 1px solid rgb(156, 151, 151);
+    overflow-y: auto;
+}
+
+
+.config_devices_box{
+    height: 745px;
+    margin-bottom: 4px;
+    border: 1px solid rgb(156, 151, 151);
+    overflow-y: auto;
+}
+
+
+.config_devices_box textarea{
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+    border: 1px solid rgb(156, 151, 151);
+}
+
+
+
+
+
+.run_bt{
+    background: rgb(241, 16, 16);
+    color: white;
+    border-radius: 9px;
+    width: 120px;
+    text-align: center;
+    height: 30px;
+}
+
+.run_bt a,i,label{
+    margin-top: 1px;
+    color: white;
+    text-decoration: none;
+}
+

@@ -38,8 +38,8 @@
                 </div>
                 <div class="form-group row ">
                     <input type="submit" class="btn btn-primary mb-2" name="add" value="Add">
-                    <input type="button" class="btn btn-secondary mb-2" name="config" value="Config">
-                    <input type="button" class="btn btn-secondary mb-2" name="reload" value="Limpar">
+                    <a href="{% url 'config_devices' %}"><input type="button" class="btn btn-secondary mb-2" value="Config"></a>
+                    <a href="{% url 'add_device' %}"><input type="button" class="btn btn-secondary mb-2" value="Limpar"></a>
                 </div>
             </div>
         </form>
