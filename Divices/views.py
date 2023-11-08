@@ -41,11 +41,30 @@ def add_device(request):
 
 def config_devices(request):
     
+    if request.method == 'GET':
+        devices = Devices.objects.all()
+
+        context = {
+            'devices':devices
+            }
+
+        return render(request, 'config_devices.html', {'context':context,})
+    else:
+        config_devices = request.POST.get('config_area')
+
+        print(f'AREA')
+        return render(request, 'config_devices.html', {})
+    
+
+def carregar_area(request):
     devices = Devices.objects.all()
 
     context = {
         'devices':devices
         }
+    
+    config_devices = request.POST.get('config_area')
+
+    print(f'AREA: {config_devices} {request.POST}')
 
     return render(request, 'config_devices.html', {'context':context,})
-

@@ -68,8 +68,9 @@
     </div>
     <div class="blocos right_block">
         <h3>Configurations</h3>
-            <div style="display: flex;">
 
+            <div style="display: flex;">
+                
                 <div class="col">
                     <input type="text" class="row" placeholder="Username">
                 </div>
@@ -89,9 +90,10 @@
             </div>
 
             <div class="config_devices_box" >
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea name="config_area" id="" cols="30" rows="10"></textarea>
             </div>
-        <div class="run_bt">  <a href=""> <i class="fa-solid fa-person-running fa-xl"></i> <label>  Run </label> </a></div>
+            <div class="run_bt">  <a href="{% url 'carregar_area' %}"> <i class="fa-solid fa-person-running fa-xl"></i> <label>  Run </label> </a></div>
+
     </div>
 </div>
 
