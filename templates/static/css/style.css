@@ -45,13 +45,13 @@
 
 
 .config_devices_box{
-    height: 745px;
+    height: 670px;
+    width: 600px;
     margin-bottom: 4px;
-    border: 1px solid rgb(156, 151, 151);
     overflow-y: auto;
 }
 
-
+/* -------- AUTHENTICATION BOX  -----------*/
 .config_devices_box textarea{
     width: 100%;
     padding: 10px;
@@ -59,15 +59,36 @@
     border: 1px solid rgb(156, 151, 151);
 }
 
+.aut_area{
+    margin-top: 15px;
+}
+
+.check_autentication{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.check_autentication label{
+    margin-right: 10px;
+}
 
 
-.run_bt{
-    background: rgb(241, 16, 16);
-    color: white;
+
+/* -------- BOTOES -----------*/
+
+.bt{
     border-radius: 9px;
-    width: 120px;
+    width: 140px;
     text-align: center;
     height: 30px;
+    border:none;
+}
+
+.run_bt{
+    background: rgb(19, 121, 25);
+    color: white;
+    
 }
 
 

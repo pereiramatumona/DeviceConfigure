@@ -11,89 +11,97 @@
 <div class="container_">
     <div class="blocos left_block">
         <h3>Device List</h3>
-        <div class="unchecked_devices_box">
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Device</th>
-                    <th scope="col">IP Address</th>
-                    <th scope="col">Manufacturing</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for device in context.devices %}    
+        <form action="writing_the_file" method="post"> {% csrf_token %}
+            <div class="unchecked_devices_box">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <th scope="row"> <input type="checkbox" name="" id=""></th>
-                            <td> <a href="#"> {{device.device}}</a>
-                            </td>
-                            <td>{{device.ip_addr}}</td>
-                            <td>{{device.fabricante}}</td>
+                            <th scope="col">#</th>
+                            <th scope="col">Device</th>
+                            <th scope="col">IP Address</th>
+                            <th scope="col">Manufacturing</th>
                         </tr>
-                     {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div><a href="{% url 'add_device' %}"><input type="button" value="Configure Device"> <input type="button" value="Add Device"></a></div> 
+                    </thead>
+                    <tbody>
+                        {% for device in context.devices %}    
+                            <tr>
+                                <th scope="row"> <input type="checkbox" name="{{device.device}};{{device.ip_addr}};{{device.fabricante}}" id=""></th>
+                                <td> <a href="#"> {{device.device}}</a></td>
+                                <td>{{device.ip_addr}}</td>
+                                <td>{{device.fabricante}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div><a href="{% url 'add_device' %}"><input type="button"  class="bt" value="Configure Device"></a> <input type="submit" class="bt" value="Add Device"></div> 
+        </form>
     </div>
     <div class="blocos center_block">
         <h3>Device Selected</h3>
-        <div class="checked_devices_box" >
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Device</th>
-                    <th scope="col">IP Address</th>
-                    <th scope="col">Manufacturing</th>
-                    <th scope="col">State</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for device in context.devices %}    
-                        <tr>
-                            <th scope="row"> <input type="checkbox" name="" id=""></th>
-                            <td> <a href="#"> {{device.device}}</a>
-                            </td>
-                            <td>{{device.ip_addr}}</td>
-                            <td>{{device.fabricante}}</td>
-                            <td><span>Configured</span></td>
-                        </tr>
-                     {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <input type="button" value="Remove Device">
+        <form action="remove_element" method="post"> {% csrf_token %}
+            <div class="checked_devices_box" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Device</th>
+                        <th scope="col">IP Address</th>
+                        <th scope="col">Manufacturing</th>
+                        <th scope="col">State</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for device in tobe_configured.device %}    
+                            <tr>
+                                <th scope="row"> <input type="checkbox" name="{{device.1}}" id=""></th>
+                                <td> <a href="#"> {{device.0}}</a> </td>
+                                <td>{{device.1}}</td>
+                                <td>{{device.2}}</td>
+                                <td><span>{{device.3}}</span></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>  
+            <input type="submit"  class="bt" value="Remove Device">
+        </form>
     </div>
     <div class="blocos right_block">
         <h3>Configurations</h3>
 
-            <div style="display: flex;">
-                
-                <div class="col">
-                    <input type="text" class="row" placeholder="Username">
-                </div>
+        <div style="display: flex;">
+            
+            <form action="run_command" method="post"> {% csrf_token %}
+                    <div class="aut_area">
+                        <div class="col">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert {{ message.tags }}"> {{ message }} </div>
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                        <div class="col">
+                            <input type="text" class="row" placeholder="Username">
+                        </div>
 
-                <div class="col">
-                    <input type="password" class="row" placeholder="Password">
-                </div>
+                        <div class="col">
+                            <input type="password" class="row" placeholder="Password">
+                        </div>
 
-                <div class="col">
-                    <label  class="row" style="color: black;" >Loged User </label>
-                </div>
+                        <div class="check_autentication">
+                            <label  class="" style="color: black;" >Loged User </label>
+                            <input type="checkbox" class="checkbox_" placeholder="Password">
+                        </div>
 
-                <div class="col">
-                    <input type="checkbox" class="row" placeholder="Password">
-                </div>
+                    </div>
 
-            </div>
-
-            <div class="config_devices_box" >
-                <textarea name="config_area" id="" cols="30" rows="10"></textarea>
-            </div>
-            <div class="run_bt">  <a href="{% url 'carregar_area' %}"> <i class="fa-solid fa-person-running fa-xl"></i> <label>  Run </label> </a></div>
-
+                    <div class="config_devices_box" >
+                        <textarea name="command_area" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <button type="submit" class="bt run_bt"><i class="fa-solid fa-person-running fa-xl"></i> Run </button>
+            </form>
+        </div>
     </div>
 </div>
 

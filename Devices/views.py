@@ -48,11 +48,13 @@ def config_devices(request):
             'devices':devices
             }
 
-        return render(request, 'config_devices.html', {'context':context,})
-    else:
-        config_devices = request.POST.get('config_area')
+        tobe_configured = {
+            'device':read_file()
+        }
 
-        print(f'AREA')
+        return render(request, 'config_devices.html', {'context':context,'tobe_configured':tobe_configured})
+    else:
+      
         return render(request, 'config_devices.html', {})
     
 
@@ -65,6 +67,95 @@ def carregar_area(request):
     
     config_devices = request.POST.get('config_area')
 
-    print(f'AREA: {config_devices} {request.POST}')
+    print(f'AREA: {config_devices}')
 
     return render(request, 'config_devices.html', {'context':context,})
+
+
+
+
+def run_command(request):
+    if request.method == 'GET':
+        return render(request, 'config_devices.html' )  
+      
+    if request.method == 'POST':
+        command_area = request.POST.get('command_area')
+        if len(command_area.strip()) == 0:
+            messages.add_message(request,constants.ERROR, 'Insert the commands on command fields...')
+            return redirect('config_devices')
+        else:
+            #print( command_area)
+            print( command_validation(command_area))
+            
+            return redirect('config_devices') 
+        
+
+
+def command_validation(command):
+    
+    command_validated = command.split('\r\n')
+
+    return command_validated
+
+def read_file():
+    obj_compiled = []
+
+    with open('device_conf.dat', 'r+' ) as device_file:
+        for device in device_file:
+            componentes = device.split(';')
+            obj_compiled.append(componentes)
+
+    #print(obj_compiled)
+        
+    return obj_compiled 
+
+
+def remove_element(request):
+    
+    obj_rem = []
+    obj_list = dict(request.POST)
+
+    if request.method == 'POST':
+
+        for removed_device in obj_list:
+            if removed_device != 'csrfmiddlewaretoken':    
+                #print(removed_device)
+                #remove_from_file(removed_device)
+                obj_rem.append(removed_device)
+        #print(obj_rem)
+        remove_from_file(obj_rem)
+        
+    return redirect('config_devices')
+
+
+def remove_from_file(element):
+    obj_compiled = []
+
+    with open('device_conf.dat', 'r+' ) as device_file:
+        for device in device_file:
+            componentes = device.split(';')
+
+            #print(componentes[1])
+            if not componentes[1] in element:
+                #print('DEV', componentes)
+                obj_compiled.append(componentes)
+
+    with open('device_conf.dat', 'w' ) as device_file_:
+        for device_to_write in obj_compiled:
+            if device_to_write in obj_compiled:
+                device_file_.write(';'.join(device_to_write))
+        device_file_.write('\n')
+            
+
+            #obj_compiled.append(componentes)
+
+
+def writing_the_file(request):
+    if request.method == 'POST':
+        for device in request.POST:
+            if device != 'csrfmiddlewaretoken':
+                print(device)
+                with open('device_conf.dat', 'a+') as device_file:
+                    device_file.write(device+';not yet')
+        #device_file.write('\n')
+    return redirect('/config_devices')
