@@ -3,6 +3,12 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from .models import Devices
 
+#netmiko
+from netmiko import ConnectHandler
+from getpass import getpass
+from netmiko import ConnectHandler
+#from netmiko.ssh_exception import SSHException
+
 # Create your views here.
 
 
@@ -85,7 +91,11 @@ def run_command(request):
             return redirect('config_devices')
         else:
             #print( command_area)
-            print( command_validation(command_area))
+            lounch_command(read_file(), command_validation(command_area) )
+            #print( command_validation(command_area))
+
+
+
             
             return redirect('config_devices') 
         
@@ -159,3 +169,34 @@ def writing_the_file(request):
                     device_file.write(device+';not yet')
         #device_file.write('\n')
     return redirect('/config_devices')
+
+
+def lounch_command(device_list, command_list):
+    #device_obj = {
+    #    "device_type": "cisco_ios",
+    #    "host": "cisco1.lasthop.io",
+    #    "username": "pyclass",
+    #    "password": password,
+    #    }
+    device_obj = {}
+    device_list_updated = []
+    #password = getpass()
+
+    for device in device_list:
+        #print('DEVICE: ', device[1])
+        device_obj['device_type'] = 'cisco_ios'
+        device_obj['host'] = device[1]
+        device_obj['username'] = 'username'
+        device_obj['password'] = 'password'
+        device_list_updated.append(device_obj)
+
+    for devices_objected in device_list_updated:
+        try:
+            net_connect = ConnectHandler(**devices_objected)
+            output = net_connect.send_config_set(command_list)
+            print(f'{devices_objected['host']} - {output} ')
+
+        except Exception as err:
+            print('Timeout', err)
+            continue
+            
